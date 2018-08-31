@@ -1,4 +1,4 @@
-import request from 'ember-ajax/request';
+import fetch from 'fetch';
 import { setupContext, teardownContext } from '@ember/test-helpers';
 
 export function setup(hooks) {
@@ -13,7 +13,7 @@ export function setup(hooks) {
 
 export async function fastboot(url) {
   let endpoint = `/__fastboot-testing?url=${url}`;
-  let result = await request(endpoint);
+  let result = await fetch(endpoint).then(response => response.json());
 
   let body = extractBody(result.html);
 
